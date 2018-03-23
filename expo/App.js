@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import { Provider } from 'react-redux';
 
+import Home from './src/components/HomePage/home.js';
 import HomePage from './src/components/HomePage/homePage.js';
 import Tasks from './src/components/Tasks/tasksPage';
 
@@ -8,11 +10,12 @@ import { Ionicons } from '@expo/vector-icons'; // 6.2.2
 import { StackNavigator } from 'react-navigation'; // 1.0.0-beta.27
 import { TabNavigator, TabBarBottom } from 'react-navigation'; // 1.0.0-beta.27
 
-
+import store from './src/store.js'; //Import the store
 
 const _icon = 'ios-cube';
 const Tab = TabNavigator({
-  Home: { screen: HomePage },
+  Home: { screen: Home },
+  HomePage: { screen: HomePage },
   Tasks: { screen: Tasks },
   },
 
@@ -52,7 +55,9 @@ export default class App extends React.Component {
 
   render() {
     return (
+      <Provider store={store}>
         <Tab />
+      </Provider>
     );
   }
 }
