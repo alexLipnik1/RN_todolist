@@ -14,9 +14,9 @@ import store from './src/store.js'; //Import the store
 
 const _icon = 'ios-cube';
 const Tab = TabNavigator({
-  Home: { screen: Home },
-  HomePage: { screen: HomePage },
+  // Home: { screen: Home },
   Tasks: { screen: Tasks },
+  HomePage: { screen: HomePage },
   },
 
 

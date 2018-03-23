@@ -10,41 +10,43 @@ import styles from './tasksPage.style'
 import AddTaskPage from './AddTask/addTaskPage';
 import List from './TaskList/taskList.js';
 
-export default class TasksPage extends React.Component {
-    constructor(){
-        super();
+
+import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+
+import * as Actions from '../../actions'; //Import your actions
+
+class TasksPage extends React.Component {
+    constructor(props){
+        super(props);
         this.state = {
-            addTaskPageOpen: false,
-            finishedTaskPageOpen: false,
-            removeTaskPageOpen: false,
-            tasks: [
-            ],
-            taskIndex: 0,                        
-            newTaskImportance: 0,
-            newTaskName: '',
+            // addTaskPageOpen: false,
+            // finishedTaskPageOpen: false,
+            // removeTaskPageOpen: false,
+            // tasks: [
+            // ],
+            // taskIndex: 0,                        
+            // newTaskImportance: 0,
+            // newTaskName: '',
         }
     }
 
-    componentDidMount() {
-        // console.log('componentDidMount')
-        AsyncStorage.getItem("state").then((value)=> {
-            // console.log('get ',value)
-            // console.log(JSON.parse(value))
-            this.setState(JSON.parse(value));
-        });
-    }
+    // componentDidMount() {
+    //     AsyncStorage.getItem("state").then((value)=> {
+    //         this.setState(JSON.parse(value));
+    //     });
+    // }
 
     componentWillUpdate(nextProps, nextState) {
-        console.log(nextState.taskIndex, 'componentWillupdate');
+        console.log(nextState, 'componentWillupdate');
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if(this.state !== prevState) {
-            // console.log('add',JSON.stringify(this.state))
-            AsyncStorage.setItem("state", JSON.stringify(this.state));
-        }
-    }
-
+    // componentDidUpdate(prevProps, prevState) {
+    //     if(this.state !== prevState) {
+    //         // console.log('add',JSON.stringify(this.state))
+    //         AsyncStorage.setItem("state", JSON.stringify(this.state));
+    //     }
+    // }
 
     changeTaskIndex = (state, i) => {
         console.log('change', i)
@@ -55,12 +57,12 @@ export default class TasksPage extends React.Component {
         })
     }
 
-    toggleAddTaskPage = () => {
-        this.setState({
-            ...this.state,
-            addTaskPageOpen: !this.state.addTaskPageOpen,
-        })
-    }
+    // toggleAddTaskPage = () => {
+    //     this.setState({
+    //         ...this.state,
+    //         addTaskPageOpen: !this.state.addTaskPageOpen,
+    //     })
+    // }
 
     toggleTask = (props) => {
         const updateTask = this.state.tasks.map((obj, index) => {
@@ -124,7 +126,6 @@ export default class TasksPage extends React.Component {
     }
 
     addTesk = (value, _importance) => {
-        // console.log(value)
         let obj = {taskName: value, importance: _importance, active: false, finished: false};
 
         this.setState({
@@ -140,7 +141,7 @@ export default class TasksPage extends React.Component {
     render(){
         return(
             <View style={styles.container}>
-                <List 
+                {/* <List 
                     taskIndex={this.state.taskIndex}
                     _changeTaskIndex={this._changeTaskIndex}
                     changeTaskIndex={this.changeTaskIndex}
@@ -153,16 +154,16 @@ export default class TasksPage extends React.Component {
                     toggleTask={this.toggleTask}
                     Tasks={this.state.tasks} 
                     finishedTaskOverlay={this.state.finishedTaskPageOpen}
-                />
+                /> */}
 
                 <View style={styles.buttonContainer}>
                     <Button textStyle={styles.textStyle}
                             buttonStyle={styles.buttonStyle}
-                            title='Add Task' onPress={this.toggleAddTaskPage}
+                            title='Add Task' onPress={this.props.toggleAddTaskPage}
                     />
                 </View>
 
-                <Overlay visible={this.state.addTaskPageOpen}
+                <Overlay visible={this.props.AddTaskPageOpen}
                     closeOnTouchOutside animationType="zoomIn"
                     containerStyle={styles.containerStyle}
                     childrenWrapperStyle={styles.childrenWrapperStyle}
@@ -180,3 +181,15 @@ export default class TasksPage extends React.Component {
     }
 
 }
+
+function mapStateToProps(state, props) {
+    return {
+        AddTaskPageOpen: state.tasksReducer.AddTaskPageOpen
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(Actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TasksPage);
