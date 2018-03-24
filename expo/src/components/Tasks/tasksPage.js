@@ -30,7 +30,7 @@ class TasksPage extends React.Component {
     // }
 
     componentWillUpdate(nextProps, nextState) {
-        console.log(nextState, 'componentWillupdate');
+        // console.log(this.props.tasks, 'componentWillupdate');
     }
 
     // componentDidUpdate(prevProps, prevState) {
@@ -40,48 +40,10 @@ class TasksPage extends React.Component {
     //     }
     // }
 
-    toggleRemoveTaskPage = (props) => {
-        this.setState({
-            ...this.state,
-            // removeTaskPageOpen: !this.state.removeTaskPageOpen,
-        })
-    }
-
-    finishedTaskPage = (props) => {
-        const updateTask = this.state.tasks.map((obj, index) => {
-            return index === props[1] ? props[0] : obj;
-        });
-        this.setState({
-            ...this.state,
-            tasks: updateTask,
-            finishedTaskPageOpen: !this.state.finishedTaskPageOpen,
-        })
-    }
-
-    removeTask = (i) => {
-        console.log(i, 'remove')
-        const arr = [
-            ...this.state.tasks.slice(0, i),
-            ...this.state.tasks.slice(i+1)
-        ]
-        this.setState({
-            tasks: arr,
-            removeTaskPageOpen: !this.state.removeTaskPageOpen,
-        })
-    }
-
     render(){
         return(
             <View style={styles.container}>
-                <List 
-                    // taskIndex={this.state.taskIndex}
-                    // changeTaskIndex={this.changeTaskIndex}
-                    // removeTask={this.removeTask}
-                    // toggleRemoveTaskPage={this.toggleRemoveTaskPage}
-                    // finishedTaskPage={this.finishedTaskPage}
-                    // toggleFinishedTaskPage={this.toggleFinishedTaskPage}
-                    // toggleTask={this.toggleTask}
-                />
+                <List />
 
                 <View style={styles.buttonContainer}>
                     <Button textStyle={styles.textStyle}

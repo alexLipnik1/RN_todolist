@@ -43,9 +43,6 @@ const _List = (props) => {
                         key={i}
                         task={l}
                         _index={i}
-                        toggleTask={props.toggleTask}
-                        finishedTaskPage={finishedTaskPage}
-                        Tasks={Tasks}
                     />    
                 </GestureRecognizer>
             ))}

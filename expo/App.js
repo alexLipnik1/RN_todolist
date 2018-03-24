@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { Provider } from 'react-redux';
 
-import Home from './src/components/HomePage/home.js';
 import HomePage from './src/components/HomePage/homePage.js';
 import Tasks from './src/components/Tasks/tasksPage';
 
@@ -14,9 +13,8 @@ import store from './src/store.js'; //Import the store
 
 const _icon = 'ios-cube';
 const Tab = TabNavigator({
-  // Home: { screen: Home },
-  Tasks: { screen: Tasks },
   HomePage: { screen: HomePage },
+  Tasks: { screen: Tasks },
   },
 
 
@@ -25,7 +23,7 @@ const Tab = TabNavigator({
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state;
         let iconName;
-        if (routeName === 'Home') {
+        if (routeName === 'HomePage') {
           iconName = `${_icon}${focused ? '' : '-outline'}`;
         } else if (routeName === 'Tasks') {
           iconName = `ios-options${focused ? '' : '-outline'}`;

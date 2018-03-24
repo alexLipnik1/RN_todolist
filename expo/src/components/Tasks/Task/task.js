@@ -9,7 +9,12 @@ import TaskRegular from './TaskRegular/taskRegular';
 import TaskFinished from './TaskFinished/taskFinished';
 import styles from './task.styles';
 
-export default Task = (props) => {
+import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+
+import * as Actions from '../../../actions'; //Import your actions
+
+const Task = (props) => {
     const {
         task,
         _index,
@@ -24,7 +29,6 @@ export default Task = (props) => {
                 <TaskFinished 
                     task={task}
                     _index={_index}
-                    Tasks={Tasks}
                 />
             )
         }
@@ -34,9 +38,6 @@ export default Task = (props) => {
                     <TaskActive
                         task={task}
                         _index={_index}
-                        toggleTask={toggleTask}
-                        finishedTaskPage={finishedTaskPage}
-                        Tasks={Tasks}
                     />
                 )
             }
@@ -45,8 +46,6 @@ export default Task = (props) => {
                     <TaskRegular 
                         task={task}
                         _index={_index}
-                        toggleTask={toggleTask}
-                        Tasks={Tasks}
                     />
                 )
             }
@@ -57,3 +56,16 @@ export default Task = (props) => {
         <TaskStyle />
     )
 }
+
+function mapStateToProps(state, props) {
+    return {
+        AddTaskPageOpen: state.tasksReducer.AddTaskPageOpen,
+        Tasks: state.tasksReducer.tasks,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(Actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Task);

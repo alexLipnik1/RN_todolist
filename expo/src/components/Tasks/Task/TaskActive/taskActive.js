@@ -9,8 +9,13 @@ import styles from '../task.styles';
 const _icon = 'ios-checkmark-circle-outline';    
 
 
-export default taskActive = (props) => {
-    const {finishedTaskPage, toggleTask, task, _index, Tasks} = props;
+import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+
+import * as Actions from '../../../../actions'; //Import your actions
+
+const taskActive = (props) => {
+    const {toggleTask, task, _index, Tasks} = props;
     
     function handlePress(){
         const newTask = {
@@ -18,7 +23,7 @@ export default taskActive = (props) => {
             active: Tasks[_index].active,
             finished: !Tasks[_index].finished
         }
-        return finishedTaskPage([newTask ,_index]);
+        return props.finishedTaskPage([newTask ,_index]);
     }
 
     const Istyle = () => {
@@ -75,3 +80,19 @@ export default taskActive = (props) => {
 
 
 )}
+
+function mapStateToProps(state, props) {
+    return {
+        taskIndex: state.tasksReducer.taskIndex,
+        Tasks: state.tasksReducer.tasks,
+        
+        removeTaskPageOpen: state.tasksReducer.removeTaskPageOpen,
+        finishedTaskPageOpen: state.tasksReducer.finishedTaskPageOpen,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(Actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(taskActive);

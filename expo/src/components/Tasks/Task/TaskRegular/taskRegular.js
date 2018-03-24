@@ -6,13 +6,15 @@ import Overlay from 'react-native-modal-overlay';
 
 import styles from './taskRegular.styles';
 
-export default TaskRegular = (props) => {
+import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+
+import * as Actions from '../../../../actions'; //Import your actions
+
+const TaskRegular = (props) => {
     const {
         task,
         _index,
-        lastActiveIndex,
-        toggleTask,
-        finishedTaskPage,
         Tasks
     } = props;
 
@@ -35,7 +37,7 @@ export default TaskRegular = (props) => {
             importance: Tasks[this.index].importance,
             active: !Tasks[this.index].active,
         }
-        return toggleTask([newTask ,this.index]);
+        return props.toggleTask([newTask ,this.index]);
     }
 
     return (
@@ -60,3 +62,19 @@ export default TaskRegular = (props) => {
         </View>
     )
 }
+
+function mapStateToProps(state, props) {
+    return {
+        taskIndex: state.tasksReducer.taskIndex,
+        Tasks: state.tasksReducer.tasks,
+        
+        removeTaskPageOpen: state.tasksReducer.removeTaskPageOpen,
+        finishedTaskPageOpen: state.tasksReducer.finishedTaskPageOpen,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(Actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskRegular);

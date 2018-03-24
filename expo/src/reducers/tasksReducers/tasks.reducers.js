@@ -8,6 +8,7 @@ import {
     NEW_TASK_IMPORTANCE,
     NEW_TASK_NAME,
     CHANGE_TASK_INDEX,
+    FINISHED_TASK_PAGE,
 } from "../../actions/";
  
 let initialState = { 
@@ -50,10 +51,10 @@ export const tasksReducer = (state = initialState, action) => {
                 taskIndex: action.newIndex,
             }
         case NEW_TASK_NAME:
-        return {
-            ...state,
-            newTaskName: action.taskName
-        }
+            return {
+                ...state,
+                newTaskName: action.taskName
+            }
         case NEW_TASK_IMPORTANCE:
             return {
                 ...state,
@@ -76,6 +77,16 @@ export const tasksReducer = (state = initialState, action) => {
             return {
                 ...state,
                 tasks: updateTask,
+            }
+        case FINISHED_TASK_PAGE:
+            const _updateTask = state.tasks.map((obj, index) => {
+                return index === action.data[1] ? action.data[0] : obj;
+            });
+            console.log(action.data[0])
+            return {
+                ...state,
+                tasks: _updateTask,
+                finishedTaskPageOpen: !state.finishedTaskPageOpen,
             }
         case TOGGLE_FINISHED_TASK_PAGE:
             return {

@@ -3,9 +3,12 @@ import { View, Text, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 import styles from './finishedTaskPage.style';
 
+import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
 
-export default finishedTaskPage = (props) => {
-    const {toggleFinishedTaskPage} = props;
+import * as Actions from '../../../actions'; //Import your actions
+
+const finished = (props) => {
 
     return (
         <View style={styles.container} >
@@ -18,8 +21,22 @@ export default finishedTaskPage = (props) => {
             <Button textStyle={styles.textStyle}
                     buttonStyle={styles.buttonStyle}
                     title='Submit' 
-                    onPress={() => toggleFinishedTaskPage()}
+                    onPress={() => props.toggleFinishedTaskPage()}
             />
         </View>
     )
 }
+
+
+function mapStateToProps(state, props) {
+    return {
+        AddTaskPageOpen: state.tasksReducer.AddTaskPageOpen,
+        tasks: state.tasksReducer.tasks,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(Actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(finished);

@@ -3,6 +3,7 @@ export const REMOVE_TASK = 'REMOVE_TASK';
 export const NEW_TASK_IMPORTANCE = 'NEW_TASK_IMPORTANCE';
 export const NEW_TASK_NAME = 'NEW_TASK_NAME';
 export const CHANGE_TASK_INDEX = 'CHANGE_TASK_INDEX';
+export const FINISHED_TASK_PAGE = 'FINISHED_TASK_PAGE';
 
 export function addTask(newTaskName, newTaskImportance){
     return (dispatch) => {
@@ -13,6 +14,12 @@ export function addTask(newTaskName, newTaskImportance){
 export function removeTask(index){
     return (dispatch) => {
         dispatch({type: REMOVE_TASK, index: index})
+    }
+} 
+
+export function finishedTaskPage(arr){
+    return (dispatch) => {
+        dispatch({type: FINISHED_TASK_PAGE, data: arr})
     }
 } 
 
