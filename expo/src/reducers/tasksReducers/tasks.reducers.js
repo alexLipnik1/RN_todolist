@@ -4,6 +4,7 @@ import {
     TOGGLE_REMOVE_TASK_PAGE,
     TOGGLE_TASK,
     ADD_TASK,
+    REMOVE_TASK,
     NEW_TASK_IMPORTANCE,
     NEW_TASK_NAME,
     CHANGE_TASK_INDEX,
@@ -33,6 +34,15 @@ export const tasksReducer = (state = initialState, action) => {
                     obj
                 ]
             }
+        case REMOVE_TASK:
+            const arr = [
+                ...state.tasks.slice(0, action.index),
+                ...state.tasks.slice(action.index+1)
+            ]
+            return {
+                tasks: arr,
+                removeTaskPageOpen: !state.removeTaskPageOpen,
+            }
         case CHANGE_TASK_INDEX:
             return {
                 ...state,
@@ -58,6 +68,14 @@ export const tasksReducer = (state = initialState, action) => {
             return {
                 ...state,
                 removeTaskPageOpen: !state.removeTaskPageOpen
+            }
+        case TOGGLE_TASK:
+            const updateTask = state.tasks.map((obj, index) => {
+                return index === action.data[1] ? action.data[0] : obj;
+            });
+            return {
+                ...state,
+                tasks: updateTask,
             }
         case TOGGLE_FINISHED_TASK_PAGE:
             return {

@@ -4,10 +4,15 @@ import { Button } from 'react-native-elements';
 import { Container, Header, Content, Form, Item, Input, Label } from 'native-base';
 import index from 'react-native-modal-overlay';
 
+
+import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+
+import * as Actions from '../../../actions'; //Import your actions
+
+
 const removeTaskPage = (props) => {
     const {
-        toggleRemoveTaskPage,
-        removeTask,
         taskIndex
     }= props;
 
@@ -25,7 +30,7 @@ const removeTaskPage = (props) => {
                     borderRadius: 2,
                     marginRight: -10,
                 }} 
-                onPress={()=>{removeTask(taskIndex), console.log(taskIndex, 'test')}}
+                onPress={()=>{props.removeTask(props.taskIndex)}}
                 title="Yes" />
             <Button 
                 textStyle={{fontSize: 17, fontWeight: 'bold'}}
@@ -35,10 +40,25 @@ const removeTaskPage = (props) => {
                     borderRadius: 2,          
                     marginLeft: -10,
                 }} 
-                onPress={toggleRemoveTaskPage} 
+                onPress={props.toggleRemoveTaskPage} 
                 title="No" />
         </View>
     </View>
 )}
 
-export default removeTaskPage;
+
+function mapStateToProps(state, props) {
+    return {
+        taskIndex: state.tasksReducer.taskIndex,
+        Tasks: state.tasksReducer.tasks,
+        
+        removeTaskPageOpen: state.tasksReducer.removeTaskPageOpen,
+        finishedTaskPageOpen: state.tasksReducer.finishedTaskPageOpen,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(Actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(removeTaskPage);

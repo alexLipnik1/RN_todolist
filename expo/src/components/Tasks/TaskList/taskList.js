@@ -19,14 +19,6 @@ import * as Actions from '../../../actions'; //Import your actions
 const _List = (props) => {
     const {
         Tasks,
-        taskIndex,
-        lastActiveIndex,
-        toggleTask,
-        removeTask,
-        toggleFinishedTaskPage,
-        finishedTaskPage,
-        toggleRemoveTaskPage,
-        
     } = props; 
 
     return (
@@ -34,12 +26,12 @@ const _List = (props) => {
         <Overlay visible={props.finishedTaskPageOpen}
             animationType="zoomIn"
             animationDuration={500} >
-            <FinishedTaskPage toggleFinishedTaskPage={() => toggleFinishedTaskPage()}/>
+            <FinishedTaskPage toggleFinishedTaskPage={() => props.toggleFinishedTaskPage()}/>
         </Overlay>
         <Overlay visible={props.removeTaskPageOpen}
             animationType="zoomIn"
             animationDuration={500} >
-            <RemoveTaskPage taskIndex={taskIndex} removeTask={removeTask} toggleRemoveTaskPage={() =>{ toggleRemoveTaskPage(), console.log(taskIndex, 'list')}}/>
+            <RemoveTaskPage />
         </Overlay>
         <List >{
             Tasks.map((l, i) => (
@@ -51,7 +43,7 @@ const _List = (props) => {
                         key={i}
                         task={l}
                         _index={i}
-                        toggleTask={toggleTask}
+                        toggleTask={props.toggleTask}
                         finishedTaskPage={finishedTaskPage}
                         Tasks={Tasks}
                     />    
@@ -64,8 +56,9 @@ const _List = (props) => {
 
 function mapStateToProps(state, props) {
     return {
-
+        taskIndex: state.tasksReducer.taskIndex,
         Tasks: state.tasksReducer.tasks,
+        
         removeTaskPageOpen: state.tasksReducer.removeTaskPageOpen,
         finishedTaskPageOpen: state.tasksReducer.finishedTaskPageOpen,
     }

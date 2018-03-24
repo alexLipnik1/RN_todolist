@@ -1,4 +1,5 @@
 export const ADD_TASK = 'ADD_TASK';
+export const REMOVE_TASK = 'REMOVE_TASK';
 export const NEW_TASK_IMPORTANCE = 'NEW_TASK_IMPORTANCE';
 export const NEW_TASK_NAME = 'NEW_TASK_NAME';
 export const CHANGE_TASK_INDEX = 'CHANGE_TASK_INDEX';
@@ -6,6 +7,12 @@ export const CHANGE_TASK_INDEX = 'CHANGE_TASK_INDEX';
 export function addTask(newTaskName, newTaskImportance){
     return (dispatch) => {
         dispatch({type: ADD_TASK, taskName: newTaskName, importance: newTaskImportance})
+    }
+} 
+
+export function removeTask(index){
+    return (dispatch) => {
+        dispatch({type: REMOVE_TASK, index: index})
     }
 } 
 

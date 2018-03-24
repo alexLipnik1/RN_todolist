@@ -22,8 +22,8 @@ export function toggleFinishedTaskPage(){
     }
 } 
 
-export function toggleTask(){
+export function toggleTask(arr){
     return (dispatch) => {
-        dispatch({type: TOGGLE_TASK})
+        dispatch({type: TOGGLE_TASK, data: arr})
     }
 } 

@@ -20,7 +20,6 @@ class TasksPage extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            taskIndex: 0,                        
         }
     }
 
@@ -40,25 +39,6 @@ class TasksPage extends React.Component {
     //         AsyncStorage.setItem("state", JSON.stringify(this.state));
     //     }
     // }
-
-    changeTaskIndex = (state, i) => {
-        console.log('change', i)
-        this.setState({
-            ...this.state,
-            taskIndex: i,
-            removeTaskPageOpen: !this.state.removeTaskPageOpen
-        })
-    }
-
-    toggleTask = (props) => {
-        const updateTask = this.state.tasks.map((obj, index) => {
-            return index === props[1] ? props[0] : obj;
-        });
-        this.setState({
-            ...this.state,
-            tasks: updateTask,
-        })
-    }
 
     toggleRemoveTaskPage = (props) => {
         this.setState({
@@ -94,13 +74,13 @@ class TasksPage extends React.Component {
         return(
             <View style={styles.container}>
                 <List 
-                    taskIndex={this.state.taskIndex}
-                    changeTaskIndex={this.changeTaskIndex}
-                    removeTask={this.removeTask}
-                    toggleRemoveTaskPage={this.toggleRemoveTaskPage}
-                    finishedTaskPage={this.finishedTaskPage}
-                    toggleFinishedTaskPage={this.toggleFinishedTaskPage}
-                    toggleTask={this.toggleTask}
+                    // taskIndex={this.state.taskIndex}
+                    // changeTaskIndex={this.changeTaskIndex}
+                    // removeTask={this.removeTask}
+                    // toggleRemoveTaskPage={this.toggleRemoveTaskPage}
+                    // finishedTaskPage={this.finishedTaskPage}
+                    // toggleFinishedTaskPage={this.toggleFinishedTaskPage}
+                    // toggleTask={this.toggleTask}
                 />
 
                 <View style={styles.buttonContainer}>
