@@ -1,17 +1,26 @@
-import { TOGGLE_ADD_TASK_PAGE } from "../actions/" //Import the actions types constant we defined in our actions
+import { 
+    TOGGLE_ADD_TASK_PAGE,
+    TOGGLE_FINISHED_TASK_PAGE,
+    TOGGLE_TASK,
+} from "../../actions/";
  
 let initialState = { 
+    tasks: [],
+    AddTaskPageOpen: false,
 
-    AddTaskPageOpen: false
 };
  
 export const tasksReducer = (state = initialState, action) => {
     switch (action.type) {
         case TOGGLE_ADD_TASK_PAGE:
-            // state = Object.assign({}, state, {AddTaskPageOpen: true });
             return {
                 ...state,
                 AddTaskPageOpen: !state.AddTaskPageOpen
+            }
+        case TOGGLE_FINISHED_TASK_PAGE:
+            return {
+                ...state,
+                finishedTaskPageOpen: !state.finishedTaskPageOpen
             }
         default:
             return state;
