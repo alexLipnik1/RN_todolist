@@ -20,12 +20,7 @@ class TasksPage extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            addTaskPageOpen: false,
-            // finishedTaskPageOpen: false,
-            removeTaskPageOpen: false,
-            tasks: [
-                {taskName: 'value', importance: 1, active: false, finished: false}
-            ],
+            // addTaskPageOpen: false,
             taskIndex: 0,                        
             newTaskImportance: 0,
             newTaskName: '',
@@ -71,7 +66,7 @@ class TasksPage extends React.Component {
     toggleRemoveTaskPage = (props) => {
         this.setState({
             ...this.state,
-            removeTaskPageOpen: !this.state.removeTaskPageOpen,
+            // removeTaskPageOpen: !this.state.removeTaskPageOpen,
         })
     }
 
@@ -88,6 +83,7 @@ class TasksPage extends React.Component {
             newTaskName: _newTaskName
         })
     }
+
     finishedTaskPage = (props) => {
         const updateTask = this.state.tasks.map((obj, index) => {
             return index === props[1] ? props[0] : obj;
@@ -111,19 +107,6 @@ class TasksPage extends React.Component {
         })
     }
 
-    addTesk = (value, _importance) => {
-        let obj = {taskName: value, importance: _importance, active: false, finished: false};
-
-        this.setState({
-            ...this.state,
-            addTaskPageOpen: !this.state.addTaskPageOpen,
-            tasks: [
-                ...this.state.tasks,
-                obj
-            ]
-        })
-    }
-
     render(){
         return(
             <View style={styles.container}>
@@ -132,13 +115,12 @@ class TasksPage extends React.Component {
                     _changeTaskIndex={this._changeTaskIndex}
                     changeTaskIndex={this.changeTaskIndex}
                     removeTask={this.removeTask}
-                    removeTaskPage= {this.state.removeTaskPageOpen}
+                    removeTaskPage= {this.props.removeTaskPageOpen}
                     lastActiveIndex = {this.state.lastActiveIndex}
                     finishedTaskPage={this.finishedTaskPage}
                     toggleFinishedTaskPage={this.toggleFinishedTaskPage}
                     toggleRemoveTaskPage={this.toggleRemoveTaskPage}
                     toggleTask={this.toggleTask}
-                    Tasks={this.state.tasks} 
                     finishedTaskOverlay={this.props.finishedTaskPageOpen}
                 />
 
@@ -158,7 +140,7 @@ class TasksPage extends React.Component {
                         changeTaskName={this.changeTaskName}
                         newTaskName={this.state.newTaskName}
                         changeImportance={this.changeImportance}
-                        addTesk={this.addTesk}
+                        // addTesk={this.addTesk}
                         newTaskImportance={this.state.newTaskImportance}
                     />
                 </Overlay>
@@ -172,6 +154,7 @@ function mapStateToProps(state, props) {
     return {
         AddTaskPageOpen: state.tasksReducer.AddTaskPageOpen,
         tasks: state.tasksReducer.tasks,
+        removeTaskPageOpen: state.tasksReducer.removeTaskPageOpen,
         finishedTaskPageOpen: state.tasksReducer.finishedTaskPageOpen,
     }
 }

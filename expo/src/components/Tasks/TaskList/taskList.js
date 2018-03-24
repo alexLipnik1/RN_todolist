@@ -10,12 +10,18 @@ import Task from '../Task/task';
 import FinishedTaskPage from '../FinishedTask/finishedTaskPage';
 import styles from './taskList.style';
 
-export default _List = (props) => {
+
+import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+
+import * as Actions from '../../../actions'; //Import your actions
+
+const _List = (props) => {
     const {
+        Tasks,
         changeTaskIndex,
         _changeTaskIndex,
         taskIndex,
-        Tasks,
         lastActiveIndex,
         toggleTask,
         removeTask,
@@ -57,3 +63,18 @@ export default _List = (props) => {
         </List>  
     </ScrollView>
 )}
+
+
+function mapStateToProps(state, props) {
+    return {
+        Tasks: state.tasksReducer.tasks,
+        removeTaskPageOpen: state.tasksReducer.removeTaskPageOpen,
+        finishedTaskPageOpen: state.tasksReducer.finishedTaskPageOpen,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(Actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(_List);

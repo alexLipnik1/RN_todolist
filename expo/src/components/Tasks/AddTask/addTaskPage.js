@@ -5,8 +5,14 @@ import styles from './addTaskPage.Style';
 import { Container, Header, Content, Form, Item, Input, Label } from 'native-base';
 import index from 'react-native-modal-overlay';
 
-export default OverlayPage = (props) => {
-    const {addTesk, changeImportance, changeTaskName ,newTaskName, newTaskImportance} = props;
+
+import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+
+import * as Actions from '../../../actions'; //Import your actions
+
+const AddTaskPage = (props) => {
+    const {changeImportance, changeTaskName ,newTaskName, newTaskImportance} = props;
 
     return (
         <ScrollView >
@@ -45,9 +51,23 @@ export default OverlayPage = (props) => {
                 </View>
                 <Button textStyle={styles.textStyle}
                         buttonStyle={styles.buttonStyle}
-                        title='Submit' onPress={() => addTesk(newTaskName, newTaskImportance)}
+                        title='Submit' onPress={() => props.addTask('newTaskName', 0)}
                 />
             </View>
         </ScrollView>
     )
 }
+
+
+function mapStateToProps(state, props) {
+    return {
+        AddTaskPageOpen: state.tasksReducer.AddTaskPageOpen,
+        tasks: state.tasksReducer.tasks,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(Actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddTaskPage);
