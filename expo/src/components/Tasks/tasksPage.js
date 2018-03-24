@@ -20,10 +20,7 @@ class TasksPage extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            // addTaskPageOpen: false,
             taskIndex: 0,                        
-            // newTaskImportance: 0,
-            // newTaskName: '',
         }
     }
 
@@ -70,20 +67,6 @@ class TasksPage extends React.Component {
         })
     }
 
-    // changeImportance = (num) => {
-    //     this.setState({
-    //         ...this.state,
-    //         newTaskImportance: num 
-    //     })
-    // }
-
-    // changeTaskName = (_newTaskName) => {
-    //     this.setState({
-    //         ...this.state,
-    //         newTaskName: _newTaskName
-    //     })
-    // }
-
     finishedTaskPage = (props) => {
         const updateTask = this.state.tasks.map((obj, index) => {
             return index === props[1] ? props[0] : obj;
@@ -112,16 +95,12 @@ class TasksPage extends React.Component {
             <View style={styles.container}>
                 <List 
                     taskIndex={this.state.taskIndex}
-                    _changeTaskIndex={this._changeTaskIndex}
                     changeTaskIndex={this.changeTaskIndex}
                     removeTask={this.removeTask}
-                    removeTaskPage= {this.props.removeTaskPageOpen}
-                    lastActiveIndex = {this.state.lastActiveIndex}
+                    toggleRemoveTaskPage={this.toggleRemoveTaskPage}
                     finishedTaskPage={this.finishedTaskPage}
                     toggleFinishedTaskPage={this.toggleFinishedTaskPage}
-                    toggleRemoveTaskPage={this.toggleRemoveTaskPage}
                     toggleTask={this.toggleTask}
-                    finishedTaskOverlay={this.props.finishedTaskPageOpen}
                 />
 
                 <View style={styles.buttonContainer}>
@@ -136,13 +115,7 @@ class TasksPage extends React.Component {
                     containerStyle={styles.containerStyle}
                     childrenWrapperStyle={styles.childrenWrapperStyle}
                     animationDuration={500}>
-                    <AddTaskPage 
-                        // changeTaskName={this.changeTaskName}
-                        // newTaskName={this.state.newTaskName}
-                        // changeImportance={this.changeImportance}
-                        // addTesk={this.addTesk}
-                        // newTaskImportance={this.state.newTaskImportance}
-                    />
+                    <AddTaskPage />
                 </Overlay>
             </View>
         )

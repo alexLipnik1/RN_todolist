@@ -6,6 +6,7 @@ import {
     ADD_TASK,
     NEW_TASK_IMPORTANCE,
     NEW_TASK_NAME,
+    CHANGE_TASK_INDEX,
 } from "../../actions/";
  
 let initialState = { 
@@ -17,6 +18,7 @@ let initialState = {
     removeTaskPageOpen: false,
     newTaskImportance: 0,
     newTaskName: '',
+    taskIndex: 0,
 };
  
 export const tasksReducer = (state = initialState, action) => {
@@ -31,12 +33,17 @@ export const tasksReducer = (state = initialState, action) => {
                     obj
                 ]
             }
-        case NEW_TASK_NAME:
+        case CHANGE_TASK_INDEX:
             return {
                 ...state,
-                newTaskName: action.taskName
+                removeTaskPageOpen: !state.removeTaskPageOpen,                
+                taskIndex: action.newIndex,
             }
-        
+        case NEW_TASK_NAME:
+        return {
+            ...state,
+            newTaskName: action.taskName
+        }
         case NEW_TASK_IMPORTANCE:
             return {
                 ...state,

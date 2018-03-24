@@ -19,27 +19,24 @@ import * as Actions from '../../../actions'; //Import your actions
 const _List = (props) => {
     const {
         Tasks,
-        changeTaskIndex,
-        _changeTaskIndex,
         taskIndex,
         lastActiveIndex,
         toggleTask,
         removeTask,
         toggleFinishedTaskPage,
         finishedTaskPage,
-        removeTaskPage,
         toggleRemoveTaskPage,
-        finishedTaskOverlay
+        
     } = props; 
 
     return (
     <ScrollView  >
-        <Overlay visible={finishedTaskOverlay}
+        <Overlay visible={props.finishedTaskPageOpen}
             animationType="zoomIn"
             animationDuration={500} >
             <FinishedTaskPage toggleFinishedTaskPage={() => toggleFinishedTaskPage()}/>
         </Overlay>
-        <Overlay visible={removeTaskPage}
+        <Overlay visible={props.removeTaskPageOpen}
             animationType="zoomIn"
             animationDuration={500} >
             <RemoveTaskPage taskIndex={taskIndex} removeTask={removeTask} toggleRemoveTaskPage={() =>{ toggleRemoveTaskPage(), console.log(taskIndex, 'list')}}/>
@@ -48,7 +45,7 @@ const _List = (props) => {
             Tasks.map((l, i) => (
                 <GestureRecognizer 
                     key={i}            
-                    onSwipeLeft={(state)=> {changeTaskIndex(state, i)}}//handleRemove(state, i)}
+                    onSwipeLeft={(state)=> {props.changeTaskIndex(state, i)}}//handleRemove(state, i)}
                 >
                     <Task
                         key={i}
@@ -67,6 +64,7 @@ const _List = (props) => {
 
 function mapStateToProps(state, props) {
     return {
+
         Tasks: state.tasksReducer.tasks,
         removeTaskPageOpen: state.tasksReducer.removeTaskPageOpen,
         finishedTaskPageOpen: state.tasksReducer.finishedTaskPageOpen,
