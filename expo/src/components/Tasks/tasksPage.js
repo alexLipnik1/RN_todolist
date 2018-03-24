@@ -22,8 +22,8 @@ class TasksPage extends React.Component {
         this.state = {
             // addTaskPageOpen: false,
             taskIndex: 0,                        
-            newTaskImportance: 0,
-            newTaskName: '',
+            // newTaskImportance: 0,
+            // newTaskName: '',
         }
     }
 
@@ -70,19 +70,19 @@ class TasksPage extends React.Component {
         })
     }
 
-    changeImportance = (num) => {
-        this.setState({
-            ...this.state,
-            newTaskImportance: num 
-        })
-    }
+    // changeImportance = (num) => {
+    //     this.setState({
+    //         ...this.state,
+    //         newTaskImportance: num 
+    //     })
+    // }
 
-    changeTaskName = (_newTaskName) => {
-        this.setState({
-            ...this.state,
-            newTaskName: _newTaskName
-        })
-    }
+    // changeTaskName = (_newTaskName) => {
+    //     this.setState({
+    //         ...this.state,
+    //         newTaskName: _newTaskName
+    //     })
+    // }
 
     finishedTaskPage = (props) => {
         const updateTask = this.state.tasks.map((obj, index) => {
@@ -137,11 +137,11 @@ class TasksPage extends React.Component {
                     childrenWrapperStyle={styles.childrenWrapperStyle}
                     animationDuration={500}>
                     <AddTaskPage 
-                        changeTaskName={this.changeTaskName}
-                        newTaskName={this.state.newTaskName}
-                        changeImportance={this.changeImportance}
+                        // changeTaskName={this.changeTaskName}
+                        // newTaskName={this.state.newTaskName}
+                        // changeImportance={this.changeImportance}
                         // addTesk={this.addTesk}
-                        newTaskImportance={this.state.newTaskImportance}
+                        // newTaskImportance={this.state.newTaskImportance}
                     />
                 </Overlay>
             </View>

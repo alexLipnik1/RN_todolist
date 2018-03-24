@@ -4,6 +4,8 @@ import {
     TOGGLE_REMOVE_TASK_PAGE,
     TOGGLE_TASK,
     ADD_TASK,
+    NEW_TASK_IMPORTANCE,
+    NEW_TASK_NAME,
 } from "../../actions/";
  
 let initialState = { 
@@ -13,6 +15,8 @@ let initialState = {
     AddTaskPageOpen: false,
     finishedTaskPageOpen: false,
     removeTaskPageOpen: false,
+    newTaskImportance: 0,
+    newTaskName: '',
 };
  
 export const tasksReducer = (state = initialState, action) => {
@@ -27,6 +31,17 @@ export const tasksReducer = (state = initialState, action) => {
                     obj
                 ]
             }
+        case NEW_TASK_NAME:
+            return {
+                ...state,
+                newTaskName: action.taskName
+            }
+        
+        case NEW_TASK_IMPORTANCE:
+            return {
+                ...state,
+                newTaskImportance: action.importance
+        }
         case TOGGLE_ADD_TASK_PAGE:
             return {
                 ...state,

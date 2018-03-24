@@ -12,7 +12,6 @@ import { connect } from 'react-redux';
 import * as Actions from '../../../actions'; //Import your actions
 
 const AddTaskPage = (props) => {
-    const {changeImportance, changeTaskName ,newTaskName, newTaskImportance} = props;
 
     return (
         <ScrollView >
@@ -24,7 +23,7 @@ const AddTaskPage = (props) => {
                             <Item floatingLabel>
                                 <Label>Task Name</Label>
                                 <Input onChangeText={
-                                    (value) => changeTaskName(value)
+                                    (value) => props.changeName(value)
                                 }/>
                             </Item>
                     </Form>
@@ -34,24 +33,24 @@ const AddTaskPage = (props) => {
                     <Text style={styles.settingHeader}>Importance</Text>
                     <View style={styles.importance}>
                         <TouchableOpacity 
-                            style={ newTaskImportance==0 ? styles.importance_1_active: styles.importance_1}
-                            onPress={() => changeImportance(0)}
+                            style={ props.newTaskImportance ==0 ? styles.importance_1_active: styles.importance_1}
+                            onPress={() => props.changeImportance(0)}
                         />
                         <TouchableOpacity 
-                            style={ newTaskImportance==1 ? styles.importance_2_active: styles.importance_2}
-                            onPress={() => changeImportance(1)}
+                            style={ props.newTaskImportance==1 ? styles.importance_2_active: styles.importance_2}
+                            onPress={() => props.changeImportance(1)}
 
                         />
                         <TouchableOpacity 
-                            style={ newTaskImportance==2 ? styles.importance_3_active: styles.importance_3}
-                            onPress={() => changeImportance(2)}
+                            style={ props.newTaskImportance==2 ? styles.importance_3_active: styles.importance_3}
+                            onPress={() => props.changeImportance(2)}
 
                         />
                     </View>
                 </View>
                 <Button textStyle={styles.textStyle}
                         buttonStyle={styles.buttonStyle}
-                        title='Submit' onPress={() => props.addTask('newTaskName', 0)}
+                        title='Submit' onPress={() => props.addTask(props.newTaskName, props.newTaskImportance)}
                 />
             </View>
         </ScrollView>
@@ -63,6 +62,8 @@ function mapStateToProps(state, props) {
     return {
         AddTaskPageOpen: state.tasksReducer.AddTaskPageOpen,
         tasks: state.tasksReducer.tasks,
+        newTaskImportance: state.tasksReducer.newTaskImportance,
+        newTaskName: state.tasksReducer.newTaskName,
     }
 }
 
