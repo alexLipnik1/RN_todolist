@@ -25,18 +25,19 @@ class TasksPage extends React.Component {
 
     // componentDidMount() {
     //     AsyncStorage.getItem("state").then((value)=> {
-    //         this.setState(JSON.parse(value));
+    //         this.props.storage(JSON.parse(value));
     //     });
     // }
 
     componentWillUpdate(nextProps, nextState) {
-        // console.log(this.props.tasks, 'componentWillupdate');
+        console.log(this.props.tasks, 'componentWillupdate');
     }
 
     // componentDidUpdate(prevProps, prevState) {
-    //     if(this.state !== prevState) {
-    //         // console.log('add',JSON.stringify(this.state))
-    //         AsyncStorage.setItem("state", JSON.stringify(this.state));
+    //     if(this.props.state !== prevState) {
+    //         store.subscribe(()=>{
+    //             AsyncStorage.setItem("state", JSON.stringify(store.getState()));
+    //         })
     //     }
     // }
 
@@ -67,10 +68,9 @@ class TasksPage extends React.Component {
 
 function mapStateToProps(state, props) {
     return {
+        state: state,
         AddTaskPageOpen: state.tasksReducer.AddTaskPageOpen,
         tasks: state.tasksReducer.tasks,
-        removeTaskPageOpen: state.tasksReducer.removeTaskPageOpen,
-        finishedTaskPageOpen: state.tasksReducer.finishedTaskPageOpen,
     }
 }
 
