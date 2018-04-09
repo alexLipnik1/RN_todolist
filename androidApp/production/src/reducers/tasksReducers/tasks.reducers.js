@@ -13,7 +13,12 @@ import {
  
 let initialState = { 
     tasks: [
-        {taskName: 'value', importance: 1, active: false, finished: false}
+        {
+            taskName: 'value',
+            importance: 1,
+            active: false,
+            finished: false
+        }
     ],
     AddTaskPageOpen: false,
     finishedTaskPageOpen: false,

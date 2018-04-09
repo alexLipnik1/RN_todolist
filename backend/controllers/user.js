@@ -34,13 +34,6 @@ let init = () => {
             }
         });
     });
-
-    app.get('/get', function(req, res){
-        User.findOne({userName: 'avial'}, function(err, x){
-            if(err)console.log(err)
-            else console.log(x)
-        })
-    })
 }
 
 
