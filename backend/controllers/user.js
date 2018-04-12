@@ -19,7 +19,6 @@ let init = () => {
     })
 
     app.get("/api/checkUser/:userName/:password", function (request, response) {
-        console.log('check')
         User.findOne({
             "userName": request.params.userName,
             "password": request.params.password

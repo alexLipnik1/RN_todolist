@@ -1,9 +1,10 @@
-const user = {userName: 'alex1', password: '24442'}
+const user = {userName: 'alex1', password: '11111'}
 const test = {
     "user": {
       "userName": "alex1",
         "password": "11111"
     },
+    "date": "12-4-2018",
     "tasks": [
       {
         "taskName": "task",
@@ -19,7 +20,7 @@ const test = {
     },
           {
         "taskName": "task",
-      "importance": 1,
+      "importan24442ce": 1,
       "active": false,
       "finished": false
     },

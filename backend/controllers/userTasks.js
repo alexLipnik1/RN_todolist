@@ -7,7 +7,6 @@ let init = () => {
         try {
             const data = new UserTasks(req.body);
             const user = new User(req.body.user)
-            console.log('test')
             User.findOne({
                 "userName": user.userName,
                 "password": user.password
@@ -30,6 +29,27 @@ let init = () => {
             response.send("error");
         };
     })
+
+    app.get("/api/getUserTasks/:userName/:password/:date", function (request, response) {
+        console.log(request.param.date)
+        console.log('get')
+        UserTasks.findOne({
+            "user":{
+                "userName": request.params.userName,
+                "password": request.params.password,
+            },
+            "date" : request.params.date
+        }, function (err, x) {
+            if (x) {
+                response.status(200);
+                response.send(x);
+            }
+            else {
+                response.status(500);
+                response.send("Did not success");
+            }
+        });
+    });
 }
 
 
