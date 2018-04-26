@@ -1,0 +1,59 @@
+@mixin flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    height: 100%;
+    width: 100%;
+    background: #363675;
+    @include flex-center;
+
+    .loginBoxContainer{
+        height: 45%;
+        width: 60%;
+        background: #f8f5ff;
+        flex-direction: column;
+        display: flex;
+
+        .title{
+            @include flex-center;
+            flex:1;
+            color: #363675;
+            border-bottom: 1.5px solid #363675;
+            font-size: 50px;
+            font-weight: bold;
+        }
+
+        .form{
+            justify-content: center;
+            flex-direction: column;
+            flex:4;
+            background: #c1bbb9ab;
+            @include flex-center;
+
+            .formContainer{
+                width: 80%;
+                height: 100%;
+                background: #f8f5ff;
+                @include flex-center;
+                flex-direction: column;
+                
+                .inputContainer{
+                    @include flex-center;
+                    width: 80%;
+                    display: flex;
+    
+                    .label{
+                        width: 120px;
+                        font-weight: bold;
+                        font-size: 17px;
+                        padding: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+
