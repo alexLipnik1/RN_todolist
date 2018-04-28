@@ -16,7 +16,10 @@ function checkStatus(response) {
 }
 
 let handleLoginPress = () => {
-    let user = {userName: 'alex1', password: '11111'}
+    let user = {
+        userName: document.getElementById('userName').value,
+        password: document.getElementById('password').value
+    }
     fetch(`http://localhost:3002/api/checkUser/${user.userName}/${user.password}`)
         .then(res => checkStatus(res));
 }
