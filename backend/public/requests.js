@@ -42,6 +42,7 @@ const test = {
 
 function checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
+      console.log('success')
       return response
     } else {
       var error = new Error(response.statusText)
@@ -51,9 +52,8 @@ function checkStatus(response) {
 }
 
 function checkUser(){
-    console.log("get")
     fetch(`./api/checkUser/${user.userName}/${user.password}`)
-        .then(checkStatus());
+        .then(res => checkStatus(res));
 }    
 
         

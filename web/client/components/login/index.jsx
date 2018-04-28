@@ -3,8 +3,23 @@ import styles from './login.scss';
 import RaisedButton from 'material-ui/RaisedButton';
 
 let addressImg = 'https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png';
-// let addressImg = '';
-// let addressImg = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUb15YPNWxjd1jx9uuvduvBeE412ak_t-9sIlOk6kt8_59Ow2TKQ';
+
+function checkStatus(response) {
+    if (response.status >= 200 && response.status < 300) {
+        console.log('success!')
+        return response
+    } else {
+        var error = new Error(response.statusText)
+        error.response = response
+        throw error
+    }
+}
+
+let handleLoginPress = () => {
+    let user = {userName: 'alex1', password: '11111'}
+    fetch(`http://localhost:3002/api/checkUser/${user.userName}/${user.password}`)
+        .then(res => checkStatus(res));
+}
 
 let Login = () =>{
     return (
@@ -22,14 +37,12 @@ let Login = () =>{
                             <div className={styles.label}>Password:</div>
                             <input tipe="text" id="password" /> 
                         </div>
-                        {/* <Button className={styles.btn}>Login</Button> */}
                         <RaisedButton 
-                            buttonStyle={{borderRadius: 10}} 
-                            overlayStyle={{borderRadius: 10}} 
                             labelStyle={{fontWeight: 'bold'}} 
                             label="Login"
-                            // primary={true}
-                            className={styles.btn} /> 
+                            className={styles.btn}
+                            onClick={handleLoginPress}
+                            /> 
                     </div>
                 </div>
             </div>
