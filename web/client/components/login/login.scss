@@ -3,7 +3,18 @@
     justify-content: center;
     align-items: center;
 }
+@import url('https://fonts.googleapis.com/css?family=Berkshire+Swash|Great+Vibes|Rock+Salt');
 
+.img{
+    height: 120px;
+    margin: 25px;
+}
+
+.btn{
+    margin: 35px;
+    width: 150px;
+    border-radius: 5px !important;
+}
 .container{
     height: 100%;
     width: 100%;
@@ -11,8 +22,8 @@
     @include flex-center;
 
     .loginBoxContainer{
-        height: 45%;
-        width: 60%;
+        height: 500px;
+        width: 600px;
         background: #f8f5ff;
         flex-direction: column;
         display: flex;
@@ -20,9 +31,13 @@
         .title{
             @include flex-center;
             flex:1;
-            color: #363675;
-            border-bottom: 1.5px solid #363675;
-            font-size: 50px;
+            font-family: 'Berkshire Swash', cursive;
+            color: rgb(255, 255, 255);
+             border-top: 4px solid #2f322f;
+            font-size: 65px;
+            box-shadow: 0px 3px 0 0 black;
+            padding: 18px;
+            background: #61bf9a;
             font-weight: bold;
         }
 
@@ -35,6 +50,7 @@
 
             .formContainer{
                 width: 80%;
+                margin: 3px;
                 height: 100%;
                 background: #f8f5ff;
                 @include flex-center;
@@ -44,7 +60,10 @@
                     @include flex-center;
                     width: 80%;
                     display: flex;
-    
+                    
+                    input{
+                        width: 220px;
+                    }
                     .label{
                         width: 120px;
                         font-weight: bold;
