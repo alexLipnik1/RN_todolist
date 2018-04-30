@@ -1,0 +1,71 @@
+@mixin flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    height: 100%;
+    width: 100%;
+    background: #16162d;
+    @include flex-center;
+    flex-direction: column;
+    .nav{
+        height: 40px;
+        background: transparent;
+        width: 600px;
+        display: flex;
+        flex-direction: column;
+        
+        .navUp{
+            display: flex;
+            align-items: center;
+            .navBar{
+                text-decoration: none;
+                color: #33644c;
+                background: white;
+                width: 120px;
+                margin-right: 5px;
+                 font-size: 16px;
+                font-weight: bold;
+                padding: 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 6px 6px 0 0;
+                &:hover{
+                    text-decoration: none;
+                    font-size: 17px;
+                }
+
+            }
+        }
+
+        .navDown{
+            display: flex;
+            align-items: center;
+            ._navDefault{
+                height: 3px;
+                width: 120px;
+                background: #60bf9a;
+                margin-right: 5px;
+            }
+            ._navActive{
+                height: 4px;
+                width: 120px;
+                background:#64ff5e;
+                margin-right: 5px;
+            }
+        }
+        
+    }
+
+    .loginBoxContainer{
+            height: 500px;
+            width: 600px;
+            background: #f8f5ff;
+            flex-direction: column;
+            display: flex;
+    }
+    
+}

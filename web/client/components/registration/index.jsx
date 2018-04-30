@@ -1,7 +1,6 @@
 import React from 'react';
-import styles from './login.scss';
+import styles from './registration.scss';
 import {RaisedButton, AutoComplete} from 'material-ui';
-// import { NavLink, Route, Switch } from 'react-router-dom';
 
 let addressImg = 'https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png';
 
@@ -25,15 +24,11 @@ let handleLoginPress = () => {
         .then(res => checkStatus(res));
 }
 
-let handleSignupPress = () => {
-
-}
-
-let Login = () =>{
+let Registration = () =>{
     return (
         <div className={styles.container}>
             <div className={styles.loginBoxContainer}>
-                <div className={styles.title}>Login</div>
+                <div className={styles.title}>Registration</div>
                 <div className={styles.form}>
                     <div className={styles.formContainer}>
                         <img className={styles.img} src={addressImg} />
@@ -50,7 +45,7 @@ let Login = () =>{
                                 labelStyle={{fontWeight: 'bold'}} 
                                 label="Sign up"
                                 className={styles.btn1}
-                                onClick={handleSignupPress}
+                                onClick={handleLoginPress}
                                 /> 
                             <RaisedButton 
                                 labelStyle={{fontWeight: 'bold'}} 
@@ -67,4 +62,4 @@ let Login = () =>{
 }
 
 
-export default Login;
+export default Registration;
