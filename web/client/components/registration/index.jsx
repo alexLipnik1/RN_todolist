@@ -20,8 +20,16 @@ let handleLoginPress = () => {
         userName: document.getElementById('userName').value,
         password: document.getElementById('password').value
     }
-    fetch(`http://localhost:3002/api/checkUser/${user.userName}/${user.password}`)
-        .then(res => checkStatus(res));
+    fetch('http://localhost:3002/api/user', {
+        method: 'POST',
+        body: JSON.stringify(user),
+        headers: new Headers({
+            'Content-Type': 'application/json'
+            })
+    }).then(res => res.json())
+    .catch(err => console.log('ERROR:', err))
+    .then(res => console.log('success:', res))
+
 }
 
 let Registration = () =>{
@@ -47,12 +55,6 @@ let Registration = () =>{
                                 className={styles.btn1}
                                 onClick={handleLoginPress}
                                 /> 
-                            <RaisedButton 
-                                labelStyle={{fontWeight: 'bold'}} 
-                                label="Login"
-                                className={styles.btn2}
-                                onClick={handleLoginPress}
-                            /> 
                         </div>
                     </div>
                 </div>

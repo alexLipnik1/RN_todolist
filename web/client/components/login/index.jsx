@@ -8,7 +8,9 @@ let addressImg = 'https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_mal
 function checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
         console.log('success!')
+        
         return response
+
     } else {
         var error = new Error(response.statusText)
         error.response = response
@@ -46,12 +48,6 @@ let Login = () =>{
                             <input tipe="text" id="password" /> 
                         </div>
                         <div>
-                            <RaisedButton 
-                                labelStyle={{fontWeight: 'bold'}} 
-                                label="Sign up"
-                                className={styles.btn1}
-                                onClick={handleSignupPress}
-                                /> 
                             <RaisedButton 
                                 labelStyle={{fontWeight: 'bold'}} 
                                 label="Login"
